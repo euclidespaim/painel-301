@@ -13,35 +13,51 @@
    ===================================================================== */
 
 registrarCard({
-
-  // ---- 1. Identificação (troque pelos dados da sua equipe) ----
+  // ---- 1. Identificação ----
   equipe: "02",
-  titulo: "Contador de Cliques",
-  integrantes: ["Nome do aluno 1", "Nome do aluno 2"],
-  icone: "fa-solid fa-star",   // procure outro em fontawesome.com/icons
+  titulo: "Saudação por Horário",
+  integrantes: ["Yasmica", "Bell"],
+  icone: "fa-solid fa-clock", // Ícone de relógio
 
   // ---- 2. O que aparece dentro do card ----
   montar(area) {
-
-    // 2.1 — O HTML do seu card.
+    // 2.1 — O HTML do card adaptado para a saudação
     area.innerHTML = `
-      <p>Clique no botão e veja o número subir.</p>
-      <p class="visor" id="visor-02">0</p>
-      <button class="btn" id="botao-02">Clicar</button>
+      <p class="visor" id="greeting-text">Carregando...</p>
+      <p class="time-subtitle" id="current-time"></p>
     `;
 
-    // 2.2 — Pegando os elementos que acabamos de criar.
-    const visor = document.getElementById("visor-02");
-    const botao = document.getElementById("botao-02");
+    // 2.2 — Pegando os elementos do DOM
+    const greetingElement = area.querySelector("#greeting-text");
+    const timeElement = area.querySelector("#current-time");
 
-    // 2.3 — Uma variável para guardar o estado.
-    let contador = 0;
+    // 2.3 — Função que calcula a hora e exibe a mensagem correta
+    function updateGreeting() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, "0");
 
-    // 2.4 — O que acontece quando o usuário clica.
-    botao.addEventListener("click", function () {
-      contador = contador + 1;
-      visor.innerText = contador;
-    });
+      let greetingMessage = "";
 
+      if (hours >= 5 && hours < 12) {
+        greetingMessage = "Bom dia! ☀️";
+      } else if (hours >= 12 && hours < 18) {
+        greetingMessage = "Boa tarde! 🌤️";
+      } else {
+        greetingMessage = "Boa noite! 🌙";
+      }
+
+      if (greetingElement) {
+        greetingElement.textContent = greetingMessage;
+      }
+
+      if (timeElement) {
+        timeElement.textContent = `Agora são ${hours}:${minutes}`;
+      }
+    }
+
+    // 2.4 — Executa imediatamente e agenda a atualização a cada minuto
+    updateGreeting();
+    setInterval(updateGreeting, 60000);
   }
 });
