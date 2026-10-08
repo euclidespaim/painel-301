@@ -10,5 +10,51 @@
 
 /* Exemplo: deixa o visor da equipe 07 com outra cor. */
 #card-equipe-07 .visor {
-  color: var(--sucesso);
+  background: #0d0d0d;
+  border: 2px solid #8a2be2;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+#card-equipe-07 p {
+  color: #ffffff;
+}
+
+#card-equipe-07 .campo {
+  background: #181818;
+  color: #ffffff;
+  border: 1px solid #8a2be2;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+#card-equipe-07 .campo::placeholder {
+  color: #aaa;
+}
+
+#card-equipe-07 .btn {
+  background: #8a2be2;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+#card-equipe-07 .btn:hover {
+  background: #6a1bb5;
+}
+
+#card-equipe-07 .lista {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+#card-equipe-07 .lista li {
+  background: #181818;
+  color: #ffffff;
+  border-left: 4px solid #8a2be2;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
 }
