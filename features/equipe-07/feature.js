@@ -12,36 +12,48 @@
    trocando as partes aos poucos até virar a sua feature.
    ===================================================================== */
 
+
 registrarCard({
 
-  // ---- 1. Identificação (troque pelos dados da sua equipe) ----
   equipe: "07",
-  titulo: "Contador de Cliques",
-  integrantes: ["Nome do aluno 1", "Nome do aluno 2"],
-  icone: "fa-solid fa-star",   // procure outro em fontawesome.com/icons
+  titulo: "Lista de Recados",
+  integrantes: ["Luana", "Camile"],
+  icone: "fa-solid fa-list",
 
-  // ---- 2. O que aparece dentro do card ----
-  montar(area) {
+ montar(area) {
 
-    // 2.1 — O HTML do seu card.
     area.innerHTML = `
-      <p>Clique no botão e veja o número subir.</p>
-      <p class="visor" id="visor-07">0</p>
-      <button class="btn" id="botao-07">Clicar</button>
+      <p>Escreva um recado:</p>
+
+      <input 
+        class="campo" 
+        id="entrada-07" 
+        placeholder="Digite seu recado"
+      >
+
+      <button class="btn" id="adicionar-07">
+        Adicionar recado
+      </button>
+
+      <ul class="lista" id="recados-07"></ul>
     `;
 
-    // 2.2 — Pegando os elementos que acabamos de criar.
-    const visor = document.getElementById("visor-07");
-    const botao = document.getElementById("botao-07");
+    const entrada = document.getElementById("entrada-07");
+    const adicionar = document.getElementById("adicionar-07");
+    const recados = document.getElementById("recados-07");
 
-    // 2.3 — Uma variável para guardar o estado.
-    let contador = 0;
+    adicionar.onclick = function () {
 
-    // 2.4 — O que acontece quando o usuário clica.
-    botao.addEventListener("click", function () {
-      contador = contador + 1;
-      visor.innerText = contador;
-    });
+      if (entrada.value !== "") {
 
+        recados.innerHTML += `
+          <li>${entrada.value}</li>
+        `;
+
+        entrada.value = "";
+      }
+
+    };
   }
+
 });
