@@ -78,17 +78,19 @@ O asterisco `*` marca a branch atual.
 
 ## Etapa 4 — Programar
 
-Mexa **apenas** nestes dois arquivos:
+Mexa nestes dois arquivos:
 
 ```
 features/equipe-NN/feature.js
 features/equipe-NN/style.css
 ```
 
+Para o card aparecer no painel, adicione também ao `index.html` as referências ao CSS e ao JavaScript da sua equipe. Não altere nenhuma outra parte desse arquivo.
+
 Para ver o site, abra o `index.html` no navegador (clique duas vezes no arquivo).
 
-> Se você alterar qualquer arquivo fora da sua pasta, o pull request será recusado.
-> Isso não é implicância: é o que impede que 9 equipes se atropelem no mesmo projeto.
+> Se você alterar qualquer outro arquivo fora da sua pasta, o pull request será recusado.
+> A única exceção é adicionar ao `index.html` as referências dos arquivos da sua equipe.
 
 ---
 

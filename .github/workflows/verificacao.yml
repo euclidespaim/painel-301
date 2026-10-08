@@ -45,12 +45,32 @@ jobs:
           alterados=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
           echo "Arquivos alterados neste pull request:"
           echo "$alterados"
-          proibidos=$(echo "$alterados" | grep -E '^(index\.html|js/app\.js|css/base\.css)$' || true)
+
+          alteracoes_index=$(git diff --unified=0 origin/${{ github.base_ref }}...HEAD -- index.html | grep -E '^[+-]' | grep -vE '^(---|\+\+\+)' || true)
+          if [ -n "$alteracoes_index" ]; then
+            alteracoes_index_invalidas=$(printf '%s\n' "$alteracoes_index" | grep -vE '^\+[[:space:]]*(<link rel="stylesheet" href="features/equipe-[0-9]{2}/style\.css">|<script src="features/equipe-[0-9]{2}/feature\.js"></script>)[[:space:]]*$|^\+[[:space:]]*$' || true)
+            if [ -n "$alteracoes_index_invalidas" ]; then
+              echo ""
+              echo "index.html só pode receber referências aos arquivos da equipe:"
+              echo "$alteracoes_index_invalidas"
+              exit 1
+            fi
+
+            referencias=$(printf '%s\n' "$alteracoes_index" | grep -oE 'features/equipe-[0-9]{2}/(style\.css|feature\.js)' | sort -u || true)
+            while IFS= read -r referencia; do
+              if [ -n "$referencia" ] && [ ! -f "$referencia" ]; then
+                echo "Arquivo referenciado não encontrado: $referencia"
+                exit 1
+              fi
+            done <<< "$referencias"
+          fi
+
+          proibidos=$(echo "$alterados" | grep -E '^(js/app\.js|css/base\.css)$' || true)
           if [ -n "$proibidos" ]; then
             echo ""
             echo "Este pull request altera arquivos da base do projeto:"
             echo "$proibidos"
-            echo "Cada equipe deve mexer apenas na sua pasta features/equipe-NN/."
+            echo "Cada equipe deve mexer apenas na sua pasta features/equipe-NN/ e registrar seus arquivos no index.html."
             exit 1
           fi
-          echo "Nenhum arquivo da base foi alterado."
+          echo "Nenhum arquivo protegido da base foi alterado."

@@ -39,11 +39,12 @@ aberta até o seu card no ar.
 
 1. Leia o **[CONTRIBUTING.md](CONTRIBUTING.md)** — é o roteiro passo a passo, com os comandos prontos.
 2. Escolha a sua feature no **[FEATURES.md](FEATURES.md)** e reivindique na issue correspondente.
-3. Mexa **apenas** nos arquivos da sua equipe:
+3. Mexa nos arquivos da sua equipe:
    ```
    features/equipe-NN/feature.js
    features/equipe-NN/style.css
    ```
+   Para exibir o card no painel, adicione também ao `index.html` somente as referências ao CSS e ao JavaScript da sua equipe.
 
 ---
 
@@ -59,7 +60,7 @@ Para ver as alterações, salve o arquivo e aperte **F5** na página.
 
 ```
 painel-301/
-├── index.html              ← a página (NÃO MEXER)
+├── index.html              ← a página (adicionar apenas as referências da sua equipe)
 ├── css/base.css            ← estilo da base e peças prontas (NÃO MEXER)
 ├── js/app.js               ← motor do painel (NÃO MEXER)
 └── features/
@@ -92,7 +93,7 @@ Use estas classes no seu HTML e o card já sai combinando com o resto do site:
 ## Regras
 
 1. Trabalhe sempre em uma **branch**, nunca na `main`.
-2. Altere **somente** a pasta da sua equipe. A verificação automática recusa o contrário.
+2. Altere somente a pasta da sua equipe e adicione ao `index.html` as referências aos arquivos dela. A verificação automática recusa outras alterações na base.
 3. Todo `id` termina com o número da equipe: `id="botao-03"`.
 4. Commits pequenos e com mensagem que explica o que mudou.
 
