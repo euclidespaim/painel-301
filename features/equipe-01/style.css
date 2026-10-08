@@ -9,6 +9,5 @@
    ===================================================================== */
 
 /* Exemplo: deixa o visor da equipe 01 com outra cor. */
-#card-equipe-01 .visor {
-  color: var(--sucesso);
-}
+/* Container/Card principal */
+
