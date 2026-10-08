@@ -16,31 +16,71 @@ registrarCard({
 
   // ---- 1. Identificação (troque pelos dados da sua equipe) ----
   equipe: "04",
-  titulo: "Contador de Cliques",
-  integrantes: ["Nome do aluno 1", "Nome do aluno 2"],
-  icone: "fa-solid fa-star",   // procure outro em fontawesome.com/icons
+  titulo: "Dado 3D",
+  integrantes: ["Lucas e Kauã"],
+  icone: "fa-solid fa-dice-d6",
 
   // ---- 2. O que aparece dentro do card ----
   montar(area) {
 
     // 2.1 — O HTML do seu card.
     area.innerHTML = `
-      <p>Clique no botão e veja o número subir.</p>
-      <p class="visor" id="visor-04">0</p>
-      <button class="btn" id="botao-04">Clicar</button>
+      <div class="dado-wrap">
+        <div class="dado-3d" id="dado-04" data-face="1" aria-live="polite">
+          <span class="face face-1">
+            <span class="dot dot-center"></span>
+          </span>
+          <span class="face face-2">
+            <span class="dot dot-top-left"></span>
+            <span class="dot dot-bottom-right"></span>
+          </span>
+          <span class="face face-3">
+            <span class="dot dot-top-left"></span>
+            <span class="dot dot-center"></span>
+            <span class="dot dot-bottom-right"></span>
+          </span>
+          <span class="face face-4">
+            <span class="dot dot-top-left"></span>
+            <span class="dot dot-top-right"></span>
+            <span class="dot dot-bottom-left"></span>
+            <span class="dot dot-bottom-right"></span>
+          </span>
+          <span class="face face-5">
+            <span class="dot dot-top-left"></span>
+            <span class="dot dot-top-right"></span>
+            <span class="dot dot-center"></span>
+            <span class="dot dot-bottom-left"></span>
+            <span class="dot dot-bottom-right"></span>
+          </span>
+          <span class="face face-6">
+            <span class="dot dot-top-left"></span>
+            <span class="dot dot-top-center"></span>
+            <span class="dot dot-top-right"></span>
+            <span class="dot dot-bottom-left"></span>
+            <span class="dot dot-bottom-center"></span>
+            <span class="dot dot-bottom-right"></span>
+          </span>
+        </div>
+      </div>
+      <button class="btn btn-dado" id="botao-04">Rolar dado</button>
     `;
 
-    // 2.2 — Pegando os elementos que acabamos de criar.
-    const visor = document.getElementById("visor-04");
+    const dado = document.getElementById("dado-04");
     const botao = document.getElementById("botao-04");
 
-    // 2.3 — Uma variável para guardar o estado.
-    let contador = 0;
+    const mostrarFace = (face) => {
+      dado.dataset.face = String(face);
+    };
 
-    // 2.4 — O que acontece quando o usuário clica.
-    botao.addEventListener("click", function () {
-      contador = contador + 1;
-      visor.innerText = contador;
+    botao.addEventListener("click", () => {
+      const face = Math.floor(Math.random() * 6) + 1;
+      dado.classList.remove("rodando");
+      void dado.offsetWidth;
+      dado.classList.add("rodando");
+
+      setTimeout(() => {
+        mostrarFace(face);
+      }, 120);
     });
 
   }
